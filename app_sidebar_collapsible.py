@@ -52,7 +52,7 @@ if auth_type == 'basic':
         VALID_USERNAME_PASSWORD_PAIRS
     )
 
-
+# Test
 sidebar = html.Div(
     [
         html.Div(
