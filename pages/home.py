@@ -4,8 +4,7 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
 import arrow
-import logging
-import time
+import emission.core.timer as ect
 from functools import wraps
 
 # e-mission modules
