@@ -26,16 +26,12 @@ def log_execution_time(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         logger.debug(f"Starting '{func.__name__}'")
-        start_time = time.perf_counter()
-        try:
+        with ect.Timer() as wt:
+            logging.info("*" * 10 + f"Starting '{func.__name__}'"+ "*" * 10)
+            print(str(arrow.now()) + "*" * 10 + f"Starting '{func.__name__}'" + "*" * 10)
             result = func(*args, **kwargs)
-            return result
-        finally:
-            end_time = time.perf_counter()
-            elapsed_time = end_time - start_time
-            logger.debug(f"Finished '{func.__name__}' in {elapsed_time:.4f} seconds")
-    return wrapper
-
+        esds.store_dashboard_time(func.__name__, time.time(), wt.elapsed)    
+        return wrapper
 register_page(__name__, path="/")
 
 intro = "## Home"
